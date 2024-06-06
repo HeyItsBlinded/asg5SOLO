@@ -6,7 +6,7 @@ import * as THREE from "three";
 import {OrbitControls} from "jsm/controls/OrbitControls.js";
 import { OBJLoader } from 'three/OBJLoader';
 import { MTLLoader } from 'three/MTLLoader';
-// import { GTLFLoader } from 'three/GTLFLoader';
+// import { GTLFLoader } from 'three/GLTFLoader';
 
 // -- SET ----------
 const scene = new THREE.Scene();
@@ -63,7 +63,7 @@ const color5 = new THREE.MeshPhongMaterial( {color: 0xECA617} );
 const d6GEO = new THREE.BoxGeometry(0.2, 0.2, 0.2);
 const d8GEO = new THREE.OctahedronGeometry(0.2);
 const d12GEO = new THREE.DodecahedronGeometry(0.2);
-const d20GEO = new THREE.IcosahedronGeometry(0.2);
+const d20GEO = new THREE.IcosahedronGeometry(0.5);
 
 // -- GROUND ----------
 const cubeGEO = new THREE.BoxGeometry(20, 0.25, 20);
@@ -159,14 +159,24 @@ cube.rotateY((Math.PI / 180) * 45);
 // scene.add(dice19);
 // dice19.position.set(-1.5, 4.08, 3);
 
-// const dice20 = new THREE.Mesh(d20GEO, color5);
-// scene.add(dice20);
-// dice20.position.set(-6, 4.08, 4);
+// ----- HOVER-DICE -----
+const dice20 = new THREE.Mesh(d20GEO, color1);
+scene.add(dice20);
+dice20.position.set(-4, 5, 0);
 
-// ----- (BLENDER) OBJS -----
+function diceHover() {
+    const rotSpeed = 0.0005;
+    const rotAngle = rotSpeed * Date.now();
+    dice20.rotation.y = rotAngle;
+    dice20.rotation.x = rotAngle;
+    requestAnimationFrame(diceHover);
+}
+diceHover();
+
+// ----- DESK -----
 const objLoader = new OBJLoader();
 objLoader.load('customModels/table.obj', (root) => {
-    root.scale.set(0.75,0.5,0.5);
+    root.scale.set(0.75,0.75,0.5);
     root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
     root.position.set(0, 0.1, 0);
 
@@ -179,122 +189,120 @@ objLoader.load('customModels/table.obj', (root) => {
     scene.add(root);
 });
 
-// const chair1 = new OBJLoader();
-// chair1.load('customModels/chair.obj', (root) => {
-//     root.scale.set(7, 7, 7);
-//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
-//     root.position.set(-3.5, 0, -2);
+// ----- CHAIR -----
+const chair = new OBJLoader();
+chair.load('customModels/chair.obj', (root) => {
+    root.scale.set(7, 7, 7);
+    root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(10), THREE.MathUtils.degToRad(0));
+    root.position.set(0, 0, -4);
 
-//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
-//     root.traverse((child) => {
-//         if (child.isMesh) {
-//             child.material = material;
-//         }
-//     });
-//     scene.add(root);
-// });
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('textures/chairTEX.png', (texture) => {
+        const chairMAT = new THREE.MeshPhongMaterial({ map: texture });
 
-// const chair2 = new OBJLoader();
-// chair2.load('customModels/chair.obj', (root) => {
-//     root.scale.set(7, 7, 7);
-//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
-//     root.position.set(3.5, 0, -2);
+        root.traverse((child) => {
+            if (child.isMesh) {
+                child.material = chairMAT;
+            }
+        });
+        scene.add(root);
+    });
+});
 
-//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
-//     root.traverse((child) => {
-//         if (child.isMesh) {
-//             child.material = material;
-//         }
-//     });
-//     scene.add(root);
-// });
+// ----- CHEST -----
+const chest = new OBJLoader();
+chest.load('customModels/chest.obj', (root) => {
+    root.scale.set(4.5, 4.5, 4.5);
+    root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(75), THREE.MathUtils.degToRad(0));
+    root.position.set(-5, 5.25, 1.75);
 
-// const chair3 = new OBJLoader();
-// chair3.load('customModels/chair.obj', (root) => {
-//     root.scale.set(7, 7, 7);
-//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(180), THREE.MathUtils.degToRad(0));
-//     root.position.set(3.5, 0, 2);
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('textures/chestTEX.png', (texture) => {
+        const chairMAT = new THREE.MeshPhongMaterial({ map: texture });
 
-//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
-//     root.traverse((child) => {
-//         if (child.isMesh) {
-//             child.material = material;
-//         }
-//     });
-//     scene.add(root);
-// });
+        root.traverse((child) => {
+            if (child.isMesh) {
+                child.material = chairMAT;
+            }
+        });
+        scene.add(root);
+    });
+});
 
-// const chair4 = new OBJLoader();
-// chair4.load('customModels/chair.obj', (root) => {
-//     root.scale.set(7, 7, 7);
-//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(180), THREE.MathUtils.degToRad(0));
-//     root.position.set(-3.5, 0, 2);
+// ----- PEDESTAL -----
+const pedestal = new OBJLoader();
+pedestal.load('customModels/pedestal.obj', (root) => {
+    root.scale.set(1, 1, 1);
+    root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(75), THREE.MathUtils.degToRad(0));
+    root.position.set(-4, 4.25, 0);
 
-//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
-//     root.traverse((child) => {
-//         if (child.isMesh) {
-//             child.material = material;
-//         }
-//     });
-//     scene.add(root);
-// });
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('textures/pedestalTEX.png', (texture) => {
+        const pedestalMAT = new THREE.MeshPhongMaterial({ map: texture });
 
-// const dmCHAIR = new OBJLoader();
-// dmCHAIR.load('customModels/chair.obj', (root) => {
-//     root.scale.set(7, 7, 7);
-//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0));
-//     root.position.set(8, 0, 0);
+        root.traverse((child) => {
+            if (child.isMesh) {
+                child.material = pedestalMAT;
+            }
+        });
+        scene.add(root);
+    });
+});
 
-//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
-//     root.traverse((child) => {
-//         if (child.isMesh) {
-//             child.material = material;
-//         }
-//     });
-//     scene.add(root);
-// });
+// ----- BOOKS -----
+const book1 = new OBJLoader();
+book1.load('customModels/book.obj', (root) => {
+    root.scale.set(8, 8, 8);
+    root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(-10), THREE.MathUtils.degToRad(0));
+    root.position.set(-6.25, 4, -1.25);
 
-// const mtlLoader = new MTLLoader();
-// mtlLoader.load('customModels/barrel.mtl', (mtl) => {
-//     mtl.preload();
-    
-//     const cup1 = new OBJLoader();
-//     cup1.setMaterials(mtl);
-    
-//     cup1.load('customModels/barrel.obj', (root) => {
-//         root.scale.set(1, 1, 1);
-//         root.position.set(1, 1, 1);
-//         scene.add(root);
-//     });
-// });
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('textures/bookTEX.png', (texture) => {
+        const pedestalMAT = new THREE.MeshPhongMaterial({ map: texture });
 
-// const mtlLoader2 = new MTLLoader();
-// mtlLoader2.load('customModels/cup.mtl', (mtl) => {
-//     mtl.preload();
-    
-//     const cup2 = new OBJLoader();
-//     cup2.setMaterials(mtl);
-    
-//     cup2.load('customModels/cup.obj', (root) => {
-//         root.scale.set(0.06, 0.06, 0.06);
-//         root.position.set(-2, 4.7, 1);
-//         scene.add(root);
-//     });
-// });
+        root.traverse((child) => {
+            if (child.isMesh) {
+                child.material = pedestalMAT;
+            }
+        });
+        scene.add(root);
+    });
+});
 
-// const mtlLoader3 = new MTLLoader();
-// mtlLoader3.load('customModels/iphone.mtl', (mtl) => {
-//     mtl.preload();
-    
-//     const iphone = new OBJLoader();
-//     iphone.setMaterials(mtl);
-    
-//     iphone.load('customModels/iphone.obj', (root) => {
-//         root.scale.set(5, 5, 5);
-//         root.position.set(0, 0, 0);
-//         scene.add(root);
-//     });
-// });
+const book2 = new OBJLoader();
+book2.load('customModels/book.obj', (root) => {
+    root.scale.set(6.5, 6.5, 6.5);
+    root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(-5), THREE.MathUtils.degToRad(0));
+    root.position.set(-6.25, 4.75, -1.25);
+
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('textures/bookTEX.png', (texture) => {
+        const pedestalMAT = new THREE.MeshPhongMaterial({ map: texture });
+
+        root.traverse((child) => {
+            if (child.isMesh) {
+                child.material = pedestalMAT;
+            }
+        });
+        scene.add(root);
+    });
+});
+
+// ----- MUG -----
+const mug = new OBJLoader();
+mug.load('customModels/mugblack.obj', (root) => {
+    root.scale.set(0.25, 0.25, 0.25);
+    root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(170), THREE.MathUtils.degToRad(0));
+    root.position.set(-1, 3.95, -1);
+
+    const material = new THREE.MeshPhongMaterial({ color: 0x192742 }); // Custom color material
+    root.traverse((child) => {
+        if (child.isMesh) {
+            child.material = material;
+        }
+    });
+    scene.add(root);
+});
 
 
 // -- FUNCTIONS ----------
