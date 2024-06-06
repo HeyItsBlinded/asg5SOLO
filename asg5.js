@@ -6,6 +6,7 @@ import * as THREE from "three";
 import {OrbitControls} from "jsm/controls/OrbitControls.js";
 import { OBJLoader } from 'three/OBJLoader';
 import { MTLLoader } from 'three/MTLLoader';
+// import { GTLFLoader } from 'three/GTLFLoader';
 
 // -- SET ----------
 const scene = new THREE.Scene();
@@ -69,102 +70,104 @@ const cubeGEO = new THREE.BoxGeometry(20, 0.25, 20);
 const cubeMAT = new THREE.MeshPhongMaterial( {color: 0xa3a3a3} );
 const cube = new THREE.Mesh(cubeGEO, cubeMAT);
 scene.add(cube);
+cube.rotateY((Math.PI / 180) * 45);
+
 
 // -- PROPS ----------
-// D6s -----
-const dice1 = new THREE.Mesh(d6GEO, color1);
-scene.add(dice1);
-dice1.position.set(1.4, 4.08, 1);
+// // D6s -----
+// const dice1 = new THREE.Mesh(d6GEO, color1);
+// scene.add(dice1);
+// dice1.position.set(1.4, 4.08, 1);
 
-const dice2 = new THREE.Mesh(d6GEO, color2);
-scene.add(dice2);
-dice2.position.set(1.4, 4.08, 0);
+// const dice2 = new THREE.Mesh(d6GEO, color2);
+// scene.add(dice2);
+// dice2.position.set(1.4, 4.08, 0);
 
-const dice3 = new THREE.Mesh(d6GEO, color3);
-scene.add(dice3);
-dice3.position.set(0, 4.08, 0);
+// const dice3 = new THREE.Mesh(d6GEO, color3);
+// scene.add(dice3);
+// dice3.position.set(0, 4.08, 0);
 
-const dice4 = new THREE.Mesh(d6GEO, color4);
-scene.add(dice4);
-dice4.position.set(-0.5, 4.08, 1);
+// const dice4 = new THREE.Mesh(d6GEO, color4);
+// scene.add(dice4);
+// dice4.position.set(-0.5, 4.08, 1);
 
-const dice5 = new THREE.Mesh(d6GEO, color5);
-scene.add(dice5);
-dice5.position.set(-2, 4.08, 1);
+// const dice5 = new THREE.Mesh(d6GEO, color5);
+// scene.add(dice5);
+// dice5.position.set(-2, 4.08, 1);
 
-// D12s -----
-const dice6 = new THREE.Mesh(d12GEO, color1);
-scene.add(dice6);
-dice6.position.set(-4, 4.08, 2);
+// // D12s -----
+// const dice6 = new THREE.Mesh(d12GEO, color1);
+// scene.add(dice6);
+// dice6.position.set(-4, 4.08, 2);
 
-const dice7 = new THREE.Mesh(d12GEO, color2);
-scene.add(dice7);
-dice7.position.set(-3, 4.08, 4);
+// const dice7 = new THREE.Mesh(d12GEO, color2);
+// scene.add(dice7);
+// dice7.position.set(-3, 4.08, 4);
 
-const dice8 = new THREE.Mesh(d12GEO, color3);
-scene.add(dice8);
-dice8.position.set(0, 4.08, -2);
+// const dice8 = new THREE.Mesh(d12GEO, color3);
+// scene.add(dice8);
+// dice8.position.set(0, 4.08, -2);
 
-const dice9 = new THREE.Mesh(d12GEO, color4);
-scene.add(dice9);
-dice9.position.set(1, 4.08, -2);
+// const dice9 = new THREE.Mesh(d12GEO, color4);
+// scene.add(dice9);
+// dice9.position.set(1, 4.08, -2);
 
-const dice10 = new THREE.Mesh(d12GEO, color5);
-scene.add(dice10);
-dice10.position.set(3, 4.08, -4);
+// const dice10 = new THREE.Mesh(d12GEO, color5);
+// scene.add(dice10);
+// dice10.position.set(3, 4.08, -4);
 
-// D8s -----
-const dice11 = new THREE.Mesh(d8GEO, color1);
-scene.add(dice11);
-dice11.position.set(-1, 4.08, 2);
-dice11.rotateX((Math.PI / 180) * 35);
+// // D8s -----
+// const dice11 = new THREE.Mesh(d8GEO, color1);
+// scene.add(dice11);
+// dice11.position.set(-1, 4.08, 2);
+// dice11.rotateX((Math.PI / 180) * 35);
 
-const dice12 = new THREE.Mesh(d8GEO, color2);
-scene.add(dice12);
-dice12.position.set(3, 4.08, -2);
-dice12.rotateX((Math.PI / 180) * 35);
+// const dice12 = new THREE.Mesh(d8GEO, color2);
+// scene.add(dice12);
+// dice12.position.set(3, 4.08, -2);
+// dice12.rotateX((Math.PI / 180) * 35);
 
-const dice13 = new THREE.Mesh(d8GEO, color3);
-scene.add(dice13);
-dice13.position.set(-4, 4.08, 3);
-dice13.rotateX((Math.PI / 180) * 35);
+// const dice13 = new THREE.Mesh(d8GEO, color3);
+// scene.add(dice13);
+// dice13.position.set(-4, 4.08, 3);
+// dice13.rotateX((Math.PI / 180) * 35);
 
-const dice14 = new THREE.Mesh(d8GEO, color4);
-scene.add(dice14);
-dice14.position.set(-2.5, 4.08, 3);
-dice14.rotateX((Math.PI / 180) * 35);
+// const dice14 = new THREE.Mesh(d8GEO, color4);
+// scene.add(dice14);
+// dice14.position.set(-2.5, 4.08, 3);
+// dice14.rotateX((Math.PI / 180) * 35);
 
-const dice15 = new THREE.Mesh(d8GEO, color5);
-scene.add(dice15);
-dice15.position.set(-0.75, 4.08, -0.25);
-dice15.rotateX((Math.PI / 180) * 35);
+// const dice15 = new THREE.Mesh(d8GEO, color5);
+// scene.add(dice15);
+// dice15.position.set(-0.75, 4.08, -0.25);
+// dice15.rotateX((Math.PI / 180) * 35);
 
-// D20s -----
-const dice16 = new THREE.Mesh(d20GEO, color1);
-scene.add(dice16);
-dice16.position.set(5, 4.08, -3);
+// // D20s -----
+// const dice16 = new THREE.Mesh(d20GEO, color1);
+// scene.add(dice16);
+// dice16.position.set(5, 4.08, -3);
 
-const dice17 = new THREE.Mesh(d20GEO, color2);
-scene.add(dice17);
-dice17.position.set(0.2, 4.08, 2);
+// const dice17 = new THREE.Mesh(d20GEO, color2);
+// scene.add(dice17);
+// dice17.position.set(0.2, 4.08, 2);
 
-const dice18 = new THREE.Mesh(d20GEO, color3);
-scene.add(dice18);
-dice18.position.set(-4, 4.08, 5);
+// const dice18 = new THREE.Mesh(d20GEO, color3);
+// scene.add(dice18);
+// dice18.position.set(-4, 4.08, 5);
 
-const dice19 = new THREE.Mesh(d20GEO, color4);
-scene.add(dice19);
-dice19.position.set(-1.5, 4.08, 3);
+// const dice19 = new THREE.Mesh(d20GEO, color4);
+// scene.add(dice19);
+// dice19.position.set(-1.5, 4.08, 3);
 
-const dice20 = new THREE.Mesh(d20GEO, color5);
-scene.add(dice20);
-dice20.position.set(-6, 4.08, 4);
+// const dice20 = new THREE.Mesh(d20GEO, color5);
+// scene.add(dice20);
+// dice20.position.set(-6, 4.08, 4);
 
 // ----- (BLENDER) OBJS -----
 const objLoader = new OBJLoader();
 objLoader.load('customModels/table.obj', (root) => {
     root.scale.set(0.75,0.5,0.5);
-    root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(45));
+    root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
     root.position.set(0, 0.1, 0);
 
     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
@@ -175,6 +178,124 @@ objLoader.load('customModels/table.obj', (root) => {
     });
     scene.add(root);
 });
+
+// const chair1 = new OBJLoader();
+// chair1.load('customModels/chair.obj', (root) => {
+//     root.scale.set(7, 7, 7);
+//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
+//     root.position.set(-3.5, 0, -2);
+
+//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
+//     root.traverse((child) => {
+//         if (child.isMesh) {
+//             child.material = material;
+//         }
+//     });
+//     scene.add(root);
+// });
+
+// const chair2 = new OBJLoader();
+// chair2.load('customModels/chair.obj', (root) => {
+//     root.scale.set(7, 7, 7);
+//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
+//     root.position.set(3.5, 0, -2);
+
+//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
+//     root.traverse((child) => {
+//         if (child.isMesh) {
+//             child.material = material;
+//         }
+//     });
+//     scene.add(root);
+// });
+
+// const chair3 = new OBJLoader();
+// chair3.load('customModels/chair.obj', (root) => {
+//     root.scale.set(7, 7, 7);
+//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(180), THREE.MathUtils.degToRad(0));
+//     root.position.set(3.5, 0, 2);
+
+//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
+//     root.traverse((child) => {
+//         if (child.isMesh) {
+//             child.material = material;
+//         }
+//     });
+//     scene.add(root);
+// });
+
+// const chair4 = new OBJLoader();
+// chair4.load('customModels/chair.obj', (root) => {
+//     root.scale.set(7, 7, 7);
+//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(180), THREE.MathUtils.degToRad(0));
+//     root.position.set(-3.5, 0, 2);
+
+//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
+//     root.traverse((child) => {
+//         if (child.isMesh) {
+//             child.material = material;
+//         }
+//     });
+//     scene.add(root);
+// });
+
+// const dmCHAIR = new OBJLoader();
+// dmCHAIR.load('customModels/chair.obj', (root) => {
+//     root.scale.set(7, 7, 7);
+//     root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0));
+//     root.position.set(8, 0, 0);
+
+//     const material = new THREE.MeshPhongMaterial({ color: 0x5e3a0a }); // Custom color material
+//     root.traverse((child) => {
+//         if (child.isMesh) {
+//             child.material = material;
+//         }
+//     });
+//     scene.add(root);
+// });
+
+// const mtlLoader = new MTLLoader();
+// mtlLoader.load('customModels/barrel.mtl', (mtl) => {
+//     mtl.preload();
+    
+//     const cup1 = new OBJLoader();
+//     cup1.setMaterials(mtl);
+    
+//     cup1.load('customModels/barrel.obj', (root) => {
+//         root.scale.set(1, 1, 1);
+//         root.position.set(1, 1, 1);
+//         scene.add(root);
+//     });
+// });
+
+// const mtlLoader2 = new MTLLoader();
+// mtlLoader2.load('customModels/cup.mtl', (mtl) => {
+//     mtl.preload();
+    
+//     const cup2 = new OBJLoader();
+//     cup2.setMaterials(mtl);
+    
+//     cup2.load('customModels/cup.obj', (root) => {
+//         root.scale.set(0.06, 0.06, 0.06);
+//         root.position.set(-2, 4.7, 1);
+//         scene.add(root);
+//     });
+// });
+
+// const mtlLoader3 = new MTLLoader();
+// mtlLoader3.load('customModels/iphone.mtl', (mtl) => {
+//     mtl.preload();
+    
+//     const iphone = new OBJLoader();
+//     iphone.setMaterials(mtl);
+    
+//     iphone.load('customModels/iphone.obj', (root) => {
+//         root.scale.set(5, 5, 5);
+//         root.position.set(0, 0, 0);
+//         scene.add(root);
+//     });
+// });
+
 
 // -- FUNCTIONS ----------
 function animate() {
