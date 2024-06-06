@@ -21,12 +21,16 @@ scene.add(lightAMB);
 const lightDIR = new THREE.DirectionalLight(0xffffff, 0.5); // overhead
 lightDIR.position.set(0, 12, 0);
 const lightHelper = new THREE.DirectionalLightHelper(lightDIR, 6, 0xff0000); 
-scene.add(lightDIR, lightHelper);
+// scene.add(lightDIR, lightHelper);
+scene.add(lightDIR);
+
 
 const lightPOINT = new THREE.PointLight(0xffffff, 5, 8, 1);
-lightPOINT.position.set(0, 8, 0);
-const lightHelper2 = new THREE.PointLightHelper(lightPOINT, 0.5);
-scene.add(lightPOINT, lightHelper2);
+lightPOINT.position.set(6.1, 5, 2);
+const lightHelper2 = new THREE.PointLightHelper(lightPOINT, 0.4);
+// scene.add(lightPOINT, lightHelper2);
+scene.add(lightPOINT);
+// 6, 4, 2
 
 // -- CAMERA ----------
 const camera = new THREE.PerspectiveCamera(76, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -79,6 +83,11 @@ scene.add(dice3);
 dice3.position.set(-3.4, 4.15, 1.7);
 dice3.rotateY((Math.PI / 180) * 35);
 
+const dice4 = new THREE.Mesh(d6GEO, color2);
+scene.add(dice4);
+dice4.position.set(3, 4.15, -2);
+dice4.rotateY((Math.PI / 180) * 35);
+
 // D12 -----
 const dice9 = new THREE.Mesh(d12GEO, color4);
 scene.add(dice9);
@@ -91,6 +100,11 @@ scene.add(dice12);
 dice12.position.set(-3.25, 4.30, 2.75);
 dice12.rotateX((Math.PI / 180) * 45);
 dice12.rotateZ((Math.PI / 180) * 55);
+
+// D20 -----
+const dice19 = new THREE.Mesh(d20GEO, color5);
+scene.add(dice19);
+dice19.position.set(2.25, 4.4, -2.75);
 
 // ----- HOVER-DICE -----
 const dice20 = new THREE.Mesh(d20GEO, color1);
@@ -260,12 +274,42 @@ goblet.load('customModels/goblet.obj', (root) => {
     });
 });
 
-// ----- WINE -----
+// ----- WINES -----
 const wine = new OBJLoader();
 wine.load('customModels/wine.obj', (root) => {
     root.scale.set(0.1, 0.1, 0.1);
     root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
     root.position.set(-0.5, 3.95, -2);
+
+    const material = new THREE.MeshPhongMaterial({ color: 0x1e4219 }); // Custom color material
+    root.traverse((child) => {
+        if (child.isMesh) {
+            child.material = material;
+        }
+    });
+    scene.add(root);
+});
+
+const wine2 = new OBJLoader();
+wine2.load('customModels/wine.obj', (root) => {
+    root.scale.set(0.1, 0.1, 0.1);
+    root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
+    root.position.set(-2.5, 3.95, 3);
+
+    const material = new THREE.MeshPhongMaterial({ color: 0x1e4219 }); // Custom color material
+    root.traverse((child) => {
+        if (child.isMesh) {
+            child.material = material;
+        }
+    });
+    scene.add(root);
+});
+
+const wine3 = new OBJLoader();
+wine3.load('customModels/wine.obj', (root) => {
+    root.scale.set(0.075, 0.075, 0.075);
+    root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
+    root.position.set(-1.75, 3.95, 2.75);
 
     const material = new THREE.MeshPhongMaterial({ color: 0x1e4219 }); // Custom color material
     root.traverse((child) => {
@@ -301,7 +345,7 @@ const helmet = new OBJLoader();
 helmet.load('customModels/helmet.obj', (root) => {
     root.scale.set(0.1, 0.1, 0.1);
     root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
-    root.position.set(4, 3.95, 2);
+    root.position.set(3.5, 3.95, 3);
 
     const material = new THREE.MeshPhongMaterial({ color: 0x292828 }); // Custom color material
     root.traverse((child) => {
@@ -316,10 +360,26 @@ helmet.load('customModels/helmet.obj', (root) => {
 const wand = new OBJLoader();
 wand.load('customModels/wand.obj', (root) => {
     root.scale.set(0.2, 0.2, 0.2);
-    root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
-    root.position.set(0, 5, 0);
+    root.rotation.set(THREE.MathUtils.degToRad(-90), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(-20));
+    root.position.set(-4.5, 3.9, -2.75);
 
     const material = new THREE.MeshPhongMaterial({ color: 0xc47e64 }); // Custom color material
+    root.traverse((child) => {
+        if (child.isMesh) {
+            child.material = material;
+        }
+    });
+    scene.add(root);
+});
+
+// ----- LANTERN -----
+const lantern = new OBJLoader();
+lantern.load('customModels/lantern.obj', (root) => {
+    root.scale.set(0.75, 0.75, 0.75);
+    root.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(0));
+    root.position.set(6, 4, 2);
+
+    const material = new THREE.MeshPhongMaterial({ color: 0xa3a3a3 }); // Custom color material
     root.traverse((child) => {
         if (child.isMesh) {
             child.material = material;
